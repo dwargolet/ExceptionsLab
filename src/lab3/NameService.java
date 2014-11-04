@@ -18,10 +18,20 @@ public class NameService {
      * @param fullName - a name containing a first name and a last name
      * @return the last name
      */
-    public String extractLastName(String fullName) {
+    public String extractLastName(String fullName) {      
+        if(fullName == null ||fullName.isEmpty()){
+            throw new RequiredTxtException();
+        }
+        
         String[] nameParts = fullName.split(" ");
+        
+        if(nameParts.length < 2){
+            throw new RequiredTxtException();
+        }
+        
         return nameParts[LAST_NAME_IDX];
     }
+    
     
     /**
      * Finds and returns the first name from within a full name. Caution: 
@@ -32,6 +42,10 @@ public class NameService {
      */
     public String extractFirstName(String fullName) {
         String[] nameParts = fullName.split(" ");
+        
+        if(nameParts.length > 3 || nameParts.length < 2){
+            throw new RequiredTxtLengthException();
+        }
         return nameParts[FIRST_NAME_IDX];
     }
 
